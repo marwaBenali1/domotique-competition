@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Dropdown, FormControl, InputGroup, Row, Col } from "react-bootstrap";
+import { Button, Dropdown, FormControl, Row, Col, ListGroup, Badge } from "react-bootstrap";
 
 
 import Chart from "chart.js";
@@ -8,6 +8,7 @@ import SendIcon from '@material-ui/icons/Send';
 export default function App() {
   const [count, setCount] = useState(0);
   const [receivedMessage, setReceivedMessage] = useState("Nothing received!");
+  const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     window.SerialAPI.read((data) => {
@@ -59,9 +60,16 @@ export default function App() {
 
   return (
     <div className="m-5">
-      <h1> Electron/React App </h1>
+      <h1> 
+        Electron/React App 
+        <Badge className="ml-5" variant="secondary">{(isConnected) ? "connected" : "disconnected"}</Badge>
+      </h1>
+      <Button onClick={() => window.SerialAPI.open2(() => setIsConnected(true))}>Connect</Button>
+      <Button variant="danger" onClick={() => window.SerialAPI.close(() => setIsConnected(false))}>Disconnect</Button>
 
       <Dropdown.Divider />
+
+      <AvailablePortsComponent />
 
       <SerialComponent />
 
@@ -140,5 +148,24 @@ function SerialComponent(props) {
 
       <h4>{"Received message: "}{receivedMessage}</h4>
     </div>
+  );
+}
+
+export function AvailablePortsComponent(props) {
+  const [arrPorts, setArrPorts] = useState(['test']);
+
+  return(
+    <Row>
+      <Col>
+        <Button onClick={() => window.SerialAPI.availablePorts(setArrPorts)}>Refresh</Button>
+        <Button variant="warning" onClick={() => window.SerialAPI.changePortName("COM5")}>Change port</Button>
+
+        <ListGroup>
+          {arrPorts.map((portName, i) =>
+            <ListGroup.Item key={`portname-${i}`}>{portName}</ListGroup.Item>
+          )}
+        </ListGroup>
+      </Col>
+    </Row>
   );
 }

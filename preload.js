@@ -1,9 +1,10 @@
 const SerialPort = require("serialport");
 const { contextBridge } = require("electron");
 
-const portName = "COM5";
-const port = new SerialPort(portName, {
-  baudRate: 9600
+let portName = "COM7";
+let port = new SerialPort(portName, {
+  baudRate: 9600,
+  autoOpen: false,
 });
 
 const Readline = SerialPort.parsers.Readline;
@@ -17,6 +18,22 @@ contextBridge.exposeInMainWorld(
                 callback();
             });
         },
+        open2: (callback) => {
+            if(port.isOpen) {
+                return ;
+            }
+
+            port.open((err) => {
+                callback(err);
+            });
+        },
+        close: (callback) => {
+            if(port.isOpen) {
+                port.close((err) => {
+                    callback(err);
+                });
+            }
+        },
         send: (message) => {
             port.write( message + " \r");
         },
@@ -27,6 +44,40 @@ contextBridge.exposeInMainWorld(
         },
         isOpen: () => {
             alert(port.isOpen);
-        }
+        },
+        availablePorts: (callback) => {
+            let portList = [];
+
+            SerialPort.list()
+                .then((ports) => {
+                    ports.forEach(({ path }) => {
+                        portList.push(path);
+                    });
+                })
+                .then(() => {
+                    callback(portList);
+                })
+
+            return portList;
+        },
+        changePortName: (newPortName) => {
+            const callback = () => {
+                port = new SerialPort(newPortName, {
+                    baudRate: 9600,
+                    autoOpen: false
+                });
+
+                port.pipe(parser);
+            }
+
+            if(port.isOpen) {
+                port.close(() => {
+                    callback();
+                });
+            }
+            else {
+                callback();
+            }
+        },
     }
 );

@@ -22,7 +22,9 @@ function createWindow() {
     }
   })
 
-  win.loadFile('index.html')
+  win.autoHideMenuBar = true;
+  win.menuBarVisible = false;
+  win.loadFile('index.html');
 }
 
 app.allowRendererProcessReuse = false;
