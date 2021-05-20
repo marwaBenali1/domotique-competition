@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
     "watch": "webpack --config webpack.common.js --watch",
-    "install": "electron-rebuild",
+    "rebuild": "electron-rebuild",
     "build": "electron-packager . test-deploy"
   },
   "keywords": [],
@@ -30,15 +30,17 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.2",
+    "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@serialport/list": "^9.0.4",
     "bootstrap": "^4.5.3",
+    "bootstrap-icons": "^1.5.0",
     "chart.js": "^2.9.4",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-plotly.js": "^2.5.1",
+    "react-router-dom": "^5.2.0",
     "serialport": "^9.0.4"
   }
 }
