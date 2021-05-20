@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { changeTab, windowSelectors } from "./redux/WindowSlicer";
+import { windowSelectors } from "./redux/WindowSlicer";
 
-import { Header, Tab, SwitchTabs } from "./components/UIsComponents";
+import { Header, SwitchTabs } from "./components/UIsComponents";
 
 // views
 import Home from "./views/Home";
