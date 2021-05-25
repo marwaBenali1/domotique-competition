@@ -56,6 +56,8 @@ export default function Home(props) {
         </div> 
 
         <WeatherComponent />
+        
+        <p class="text-light text-center font-italic p-4"> La maison de demain, Aujourd'hui...</p>
     
       </React.Fragment>
     ); 
