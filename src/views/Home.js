@@ -39,16 +39,22 @@ export default function Home(props) {
     const disptach = useDispatch();
 
     return(
-      <div className="row p-5 m-5 justify-content-center">
-        {tabs.map((tabProps, index) => {
-          return(
-            <Tab 
-              key={`tab-${index}`} 
-              onClickHandler={() => disptach(changeTab(tabProps.tabName))} 
-              {...tabProps} 
-              />
-          );
-        })}
-      </div> 
+      <React.Fragment>
+        <div className="row p-5 m-5 justify-content-center">
+          {tabs.map((tabProps, index) => {
+            return(
+              <Tab 
+                key={`tab-${index}`} 
+                onClickHandler={() => disptach(changeTab(tabProps.tabName))} 
+                {...tabProps} 
+                />
+            );
+          })}
+        </div> 
+
+        <div className="row p-5 m-5 justify-content-center">
+          {/* Add here your elements */}
+        </div>
+      </React.Fragment>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTab, windowSelectors } from "../redux/WindowSlicer";
@@ -14,13 +14,13 @@ export function Header(props) {
             <div className="col-6">
                 <div className="d-flex align-items-center row">
                     {/* show return button if tab is not Home */}
-                    {(actualTab !== "Home") ? <LeftArrowButton onClick={() => dispatch(changeTab("Home"))} /> : null}
+                    {(actualTab !== "Home") && <LeftArrowButton onClick={() => dispatch(changeTab("Home"))} />}
                     <h1 className="mb-0 text-white" > Moby D.I.C SmartHouse </h1>
                 </div>
             </div>
             
-            <div className="col-2 ml-auto">
-                <p className="mb-0 text-white">Friday 14 May 2021</p>
+            <div className="col-2 ml-auto mt-2">
+                <DateDisplay />
             </div>
         </div>
     );
@@ -71,6 +71,28 @@ export function LeftArrowButton(props) {
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
                 <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
             </svg>
+        </div>
+    );
+}
+
+
+export function DateDisplay(props) {
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        setTimeout(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+    })
+
+    return(
+        <div className="col mb-0 align-items-center text-white">
+            <div className="p-0">
+                <h2 className="">{currentDate.toTimeString().slice(0, 8)}</h2>
+            </div>
+            <div className="p-0">
+                <small>{currentDate.toDateString()}</small>
+            </div>
         </div>
     );
 }
