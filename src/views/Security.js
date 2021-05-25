@@ -1,5 +1,5 @@
 import React from "react";
-import SwitchInput from "../views/Lighting";
+
 
 export default function Security(props) {
 
@@ -15,13 +15,32 @@ export default function Security(props) {
             backgroundSize: '100% 110%' , 
          
           }}
-        >
-        <div class="custom-control custom-switch ">
-                    <input type="checkbox" class="custom-control-input " id="customSwitch1"/>
-                    <label class="custom-control-label ml-3 " for="customSwitch1">Séjour</label>
-        </div> 
-         
+        > 
+       
+        <SwitchInput name="Front door" left="-130" top="480"/>
+        <SwitchInput name="Garage" left="320" top= "520"/>
+       
         </div>
         
+    );
+}
+function SwitchInput(props) {
+    const name = props.name;
+    const left = props.left;
+    const top = props.top;
+
+    const isChecked = props.isChecked;
+    const onCheckHandler = props.onCheckHandler;
+
+    return(
+        <div 
+            class="custom-control custom-switch" 
+            style={{ position: "relative", top: `${top}px`, left: `${left}px` }}
+            >
+            <div class="custom-control custom-switch ">
+                    <input type="checkbox" class="custom-control-input "     onChange={(e) => onCheckHandler(e)} id="customSwitch1"/>
+                    <label class="custom-control-label ml-3 " for="customSwitch1">{name}</label>
+        </div> 
+        </div>
     );
 }
