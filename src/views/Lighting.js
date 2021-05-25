@@ -1,4 +1,3 @@
-import { SwitchVideoRounded } from "@material-ui/icons";
 import React, { useReducer } from "react";
 
 
@@ -24,13 +23,49 @@ export default function Lighting(props) {
         }
     ];
 
-    const switchNames = ['1', '2', '3'];
-    const initState = {
-        '1': true,
-        '2': false,
-        '3': false,
+    const arrSwitch = [
+        {
+            name: "Room", 
+            left: "-300", top: "100" 
+        },    
+        {
+            name: "Laundery",
+            left: "-130", top: "65"
+        },
+        {
+            name: "Bath",
+            left: "-60", top: "75" 
+        },
+        {
+            name:"Kitchen",
+            left:"-400", top:"220"  
+        },
+        {
+            name: "Bathroom", 
+            left: "-320", top:"90"  
+        },
+        {
+            name: "Haull", 
+            left: "-170", top: "200"    
+        },
+        {
+            name: "Living Room",
+            left: "40", top: "250"
+        },
+        {
+            name: "Garage", 
+            left: "320", top: "300"   
+        }
+    ]
+
+    // initial state
+    // all switch are false
+    const initState = {};
+    for(let item of arrSwitch) {
+        initState[item.name] =  false;
     }
 
+    // to manipulate state of switch
     const reducer = (state, action) => {
 
         return { ...state, [action.type]: action.payload } 
@@ -38,38 +73,42 @@ export default function Lighting(props) {
 
     const [state, dispatch] = useReducer(reducer, initState);
 
+
     return(
         <React.Fragment>
 
         <div
-                class="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
-               
-                style={{ 
-                    backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
-                    backgroundRepeat: 'no-repeat',
-                    height:700, 
-                    backgroundAttachment: 'fixed', 
-                    backgroundSize: '100% 110%' , 
-                
-                  }}
-                >
-
-             <div className="row p-0 justify-content-center"> 
+            class="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
+            style={{ 
+                backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
+                backgroundRepeat: 'no-repeat',
+                height:700, 
+                backgroundAttachment: 'fixed', 
+                backgroundSize: '100% 110%' , 
+              }}
+            >
+            
+            {/* button for modes */}
+            <div className="row p-0 justify-content-center"> 
                 {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
             </div>
-           
-            <SwitchInput name="Room" left="-300" top="100"/>
-            <SwitchInput name="Laundery" left="-130" top="65"/>
-            <SwitchInput name="Bath" left="-60" top="75"/>
-            <SwitchInput name="Kitchen" left="-400" top="220"/>
-            <SwitchInput name="Bathroom" left="-320" top="90"/>
-            <SwitchInput name="Haull" left="-170" top="200"/>
-            <SwitchInput name="Living Room" left="40" top="250"/>
-            <SwitchInput name="Garage" left="320" top="300"/>
+            
+            {/* switch for rooms */}
+            {arrSwitch.map((item, index) => {
+                return(
+                    <SwitchInput 
+                        key={`${index}-switch-inputs`}
+                        name={item.name}
+                        left={item.left}
+                        top={item.top}
+                        isChecked={state[item.name]}
+                        onCheckHandler={(e) => {dispatch({ type: item.name, payload: e.target.checked });}}
+                     />
+                );
+            })}
             
             
         </div>
-        
         </React.Fragment>
 
     );
@@ -90,8 +129,14 @@ function SwitchInput(props) {
             style={{ position: "relative", top: `${top}px`, left: `${left}px` }}
             >
             <div class="custom-control custom-switch ">
-                    <input type="checkbox" class="custom-control-input "     onChange={(e) => onCheckHandler(e)} id="customSwitch1"/>
-                    <label class="custom-control-label ml-3 " for="customSwitch1">{name}</label>
+                <input 
+                    type="checkbox" 
+                    class="custom-control-input"
+                    checked={isChecked}  
+                    onChange={(e) => onCheckHandler(e)} 
+                    id={`switch-${name}`}
+                    />
+                <label class="custom-control-label ml-3 " for={`switch-${name}`}>{name}</label>
         </div> 
         </div>
     );
@@ -101,7 +146,6 @@ function SwitchInput(props) {
 function IconButton(props) {
     const name = props.name;
     const icon = props.icon;
-
 
     return (
         <button type="button" class="btn btn-outline-light  m-4">
