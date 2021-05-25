@@ -12,6 +12,7 @@ import Security from "./views/Security";
 import Lighting from "./views/Lighting";
 
 
+
 export default function App() {
   const actualTab = useSelector(windowSelectors.activeTab);
   // tab names given on order

@@ -22,8 +22,8 @@ function createWindow() {
     }
   })
 
-  win.autoHideMenuBar = true;
-  win.menuBarVisible = false;
+  //win.autoHideMenuBar = true;
+  //win.menuBarVisible = false;
   win.loadFile('index.html');
 }
 

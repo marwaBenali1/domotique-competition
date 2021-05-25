@@ -5,6 +5,8 @@ import { changeTab } from "../redux/WindowSlicer";
 
 import { Tab } from "../components/UIsComponents";
 
+import WeatherComponent from "../components/weatherComponent";
+
 
 export default function Home(props) {
     const tabs = [
@@ -52,14 +54,18 @@ export default function Home(props) {
           })}
 
         </div> 
+
+        <WeatherComponent />
     
       </React.Fragment>
     ); 
 }
 
 
-{/*<div className="row p-2 m-5 justify-content-center">
+{/*<div className="row p-2 m-5 justify-content-center" style={{ back}}>
 <div class="text-center">
+
 <img src="https://lh3.googleusercontent.com/proxy/kPlTD85HhCTk0npqr9P-zfwJ98V5kD73uEyX9m4TY5ZI2yAplNhp1hmIGG6k8UP7vqxAWao7i1v-Kl1GkhszHOr9HLcXyNNLeLJB8IkadwNt2vsAPOMNml1jDDR9Q5R4BNfjyP8stFN6mspBEfY8B2d9" class="img-fluid" alt="Responsive image"></img>
+
 </div>
 </div>*/}
