@@ -19,8 +19,8 @@ export function Header(props) {
                 </div>
             </div>
             
-            <div className="col-2 ml-auto mt-2">
-                <DateDisplay />
+            <div className="col-2 ml-auto">
+                <DateD />
             </div>
         </div>
     );
@@ -45,6 +45,7 @@ export function Tab(props) {
             </div>
           </div>
         </div>
+       
     );
 }
 
@@ -67,9 +68,9 @@ export function LeftArrowButton(props) {
     const { onClick } = props;
 
     return(
-        <div className="mr-3 text-white" style={{ cursor: 'pointer' }} onClick={() => onClick()}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
-                <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+        <div className="mr-3 text-white" style={{cursor: 'pointer' }} onClick={() => onClick()}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
             </svg>
         </div>
     );
@@ -77,6 +78,29 @@ export function LeftArrowButton(props) {
 
 
 export function DateDisplay(props) {
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        setTimeout(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+    })
+
+    return(
+        <div className="col mb-0 align-items-center text-white">
+            <div className="p-0">
+                <h2 className="">{currentDate.toTimeString().slice(0, 8)}</h2>
+            </div>
+            <div className="p-0">
+                <small>{currentDate.toDateString()}</small>
+            </div>
+        </div>
+    );
+}
+
+
+export function DateD(props) {
+
     const [currentDate, setCurrentDate] = useState(new Date());
 
     useEffect(() => {
