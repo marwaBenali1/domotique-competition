@@ -61,8 +61,8 @@ export default function Lighting(props) {
             <SwitchInput name="Room" left="-300" top="100"/>
             <SwitchInput name="Laundery" left="-130" top="65"/>
             <SwitchInput name="Bath" left="-60" top="75"/>
-            <SwitchInput name="Kitchen" left="-400" top="250"/>
-            <SwitchInput name="Bathroom" left="-320" top="110"/>
+            <SwitchInput name="Kitchen" left="-400" top="220"/>
+            <SwitchInput name="Bathroom" left="-320" top="90"/>
             <SwitchInput name="Haull" left="-170" top="200"/>
             <SwitchInput name="Living Room" left="40" top="250"/>
             <SwitchInput name="Garage" left="320" top="300"/>
