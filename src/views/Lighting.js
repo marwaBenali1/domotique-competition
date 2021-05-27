@@ -76,22 +76,21 @@ export default function Lighting(props) {
 
     return(
         <React.Fragment>
-
-        <div
-            class="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
-            style={{ 
-                backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
-                backgroundRepeat: 'no-repeat',
-                height:700, 
-                backgroundAttachment: 'fixed', 
-                backgroundSize: '100% 110%' , 
-              }}
-            >
-            
-            {/* button for modes */}
+        
+        {/* button for modes */}
             <div className="row p-0 justify-content-center"> 
                 {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
             </div>
+        <div
+            className="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
+            style={{ 
+                backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
+                backgroundRepeat: 'no-repeat',
+                height: 500
+              }}
+            >
+            
+            
             
             {/* switch for rooms */}
             {arrSwitch.map((item, index) => {
