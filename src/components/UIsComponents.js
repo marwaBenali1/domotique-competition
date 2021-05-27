@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { changeTab, windowSelectors } from "../redux/WindowSlicer";
@@ -14,16 +14,13 @@ export function Header(props) {
             <div className="col-6">
                 <div className="d-flex align-items-center row">
                     {/* show return button if tab is not Home */}
-                    {(actualTab !== "Home") ? <LeftArrowButton onClick={() => dispatch(changeTab("Home"))} /> : null}
+                    {(actualTab !== "Home") && <LeftArrowButton onClick={() => dispatch(changeTab("Home"))} />}
                     <h1 className="mb-0 text-white" > Moby D.I.C SmartHouse </h1>
                 </div>
             </div>
             
             <div className="col-2 ml-auto">
-                
-                <p className="mb-0 text-white p-1 "> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event-fill m-2" viewBox="0 0 16 16">
-                    <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-3.5-7h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5z"/>
-                </svg>Mond. 24/05/21 </p>
+                <DateD />
             </div>
         </div>
     );
@@ -75,6 +72,51 @@ export function LeftArrowButton(props) {
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
             </svg>
+        </div>
+    );
+}
+
+
+export function DateDisplay(props) {
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        setTimeout(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+    })
+
+    return(
+        <div className="col mb-0 align-items-center text-white">
+            <div className="p-0">
+                <h2 className="">{currentDate.toTimeString().slice(0, 8)}</h2>
+            </div>
+            <div className="p-0">
+                <small>{currentDate.toDateString()}</small>
+            </div>
+        </div>
+    );
+}
+
+
+export function DateD(props) {
+
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        setTimeout(() => {
+            setCurrentDate(new Date());
+        }, 1000);
+    })
+
+    return(
+        <div className="col mb-0 align-items-center text-white">
+            <div className="p-0">
+                <h2 className="">{currentDate.toTimeString().slice(0, 8)}</h2>
+            </div>
+            <div className="p-0">
+                <small>{currentDate.toDateString()}</small>
+            </div>
         </div>
     );
 }
