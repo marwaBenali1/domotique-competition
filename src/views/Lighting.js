@@ -116,25 +116,29 @@ export default function Lighting(props) {
 
     const [state, dispatch] = useReducer(reducer, initState);
 
-const [isOn,setIsOn] = useState([])
+    const [isOn,setIsOn] = useState([]);
+
     return(
         <React.Fragment>
+        
+        {/* button for modes */}
+        <div className="row p-0 justify-content-center mt-5"> 
+            {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
+        </div>
 
+        <div className="row d-flex justify-content-center mt-5">
         <div
-            class="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
+            className="col-8 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
             style={{ 
-                backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
+                backgroundImage: `url("assets/plan-crock.png")` ,
                 backgroundRepeat: 'no-repeat',
-                height:700, 
-                backgroundAttachment: 'fixed', 
-                backgroundSize: '100% 112%' , 
+                height: 700, 
+                /* backgroundAttachment: 'fixed',  */
+                backgroundSize: '93% 85%' ,
               }}
             >
             
-            {/* button for modes */}
-            <div className="row p-0 justify-content-center"> 
-                {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
-            </div>
+            
             
             {/* switch for rooms */}
             {/*{arrSwitch.map((item, index) => {
@@ -152,18 +156,12 @@ const [isOn,setIsOn] = useState([])
              {arrTurn.map((item, i) => {
                 return(
                     
-                     <Bulb top={item.top} left = {item.left} key={item.name} index={item.name} isOn={isOn} setIsOn={setIsOn}/>
+                     <Bulb top={item.top} left={item.left} key={item.name} index={item.name} isOn={isOn} setIsOn={setIsOn}/>
                 );
             })}
      
-        <div>
-       
-
-      
-       
-
+            
         </div>
-       
         </div>
         </React.Fragment>
 

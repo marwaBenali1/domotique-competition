@@ -42,7 +42,7 @@ export default function Home(props) {
 
     return(
       <React.Fragment>
-        <div className="row p-5 m-5 justify-content-center">
+        <div className="row p-5 m-3 justify-content-center">
           {tabs.map((tabProps, index) => {
             return(
               <Tab 

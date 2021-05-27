@@ -2,6 +2,12 @@ import React from "react";
 
 
 export default function Security(props) {
+    const arrDoors = [
+        { name: "Front door" },
+        { name: "Garage" },
+        { name: "Front door" },
+        { name: "Garage" },
+    ];
 
     return(
         // <div
@@ -30,37 +36,32 @@ export default function Security(props) {
         // <SwitchInput name="Garage" left="389" top= "-190"/>
        
         // </div>
-        <div  class="row">
-        <div
-         class=" col-6 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
-       
-            style={{ 
-            backgroundImage: `url("/Users/mac/Desktop/domotique/electron-react-serialPort/assets/test5.png")` ,
-            backgroundRepeat: 'no-repeat',
-            height:500, 
-            position :"relative",
-            top:"60px",
-            left:"80px",
-            
-         
-          }}
-        > </div>
-        <div class="col-6">
+        <div  class="row d-flex justify-content-center align-items-center">
+            <div class=" col-6 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
+                style={{ 
+                backgroundImage: `url("assets/plan-crock.png")` ,
+                backgroundRepeat: 'no-repeat',
+                height:500, 
+                position :"relative",
+                top:"60px",
+                left:"80px", 
+              }}
+            > </div>
+        <div class="col-3">
 
-        <div class="card" style={{ height:300, width:300, position:"relative",top:"200px",right:"-70px",opacity: 0.4}}>
-            <div class="card-body">
-                <h5 class="card-title">Manual control</h5>
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
-                </svg>
-                <SwitchInput name="Front door" top="10" />
-                <SwitchInput name="Garage" top="10"/>
-                <SwitchInput name="Front door" top="10" />
-                <SwitchInput name="Garage" top="10"/>
+            <div class="card" style={{ opacity: 0.6}}>
+                <h5 class="card-title mx-3 mt-3">
+                    <DoorIcon width={30} height={30} /> <span className="ml-2">Manual control </span>
+                </h5>
 
-
-            </div>
-            </div>
+                <div class="card-body mt-0">
+                    {arrDoors.map((item, index) => {
+                        return(
+                            <SwitchInput key={`${item.name}-${index}`} name={item.name} />
+                        );
+                    })}
+                </div>    
+        </div>
 
         </div>
         </div>
@@ -84,16 +85,33 @@ function SwitchInput(props) {
 
     const isChecked = props.isChecked;
     const onCheckHandler = props.onCheckHandler;
+    const id = Math.random();
 
     return(
         <div 
-            class="custom-control custom-switch" 
-            style={{ position: "relative", top: `${top}px`, left: `${left}px` }}
+            className="custom-control custom-switch mb-1" 
+            /* style={{ position: "relative", top: `${top}px`, left: `${left}px` }} */
             >
-            <div class="custom-control custom-switch ">
-                    <input type="checkbox" class="custom-control-input "     onChange={(e) => onCheckHandler(e)} id="customSwitch1"/>
-                    <label class="custom-control-label ml-3 " for="customSwitch1">{name}</label>
+            <div class="custom-control custom-switch">
+                <input 
+                    type="checkbox" 
+                    className="custom-control-input "     
+                    onChange={(e) => onCheckHandler(e)} id={`customSwitch-${name}-${id}`}/>
+
+                <label className="custom-control-label" for={`customSwitch-${name}-${id}`}>{name}</label>
         </div> 
         </div>
+    );
+}
+
+
+
+function DoorIcon(props) {
+    const { width, height } = props;
+
+    return(
+        <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+            <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+        </svg>
     );
 }
