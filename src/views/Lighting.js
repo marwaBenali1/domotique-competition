@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer,useState } from "react";
 
 
 export default function Lighting(props) {
@@ -25,7 +25,7 @@ export default function Lighting(props) {
 
     const arrSwitch = [
         {
-            name: "Room", 
+            name: "Room 2", 
             left: "-300", top: "100" 
         },    
         {
@@ -34,28 +34,71 @@ export default function Lighting(props) {
         },
         {
             name: "Bath",
-            left: "-60", top: "75" 
+            left: "-80", top: "75" 
         },
         {
-            name:"Kitchen",
+            name:"Room 1",
             left:"-400", top:"220"  
         },
         {
-            name: "Bathroom", 
-            left: "-320", top:"90"  
+            name: "Bath ", 
+            left: "-340", top:"120"  
         },
         {
-            name: "Haull", 
+            name: "Hall", 
             left: "-170", top: "200"    
         },
         {
             name: "Living Room",
-            left: "40", top: "250"
+            left: "40", top: "180"
+        },
+        {
+            name: "Kitchen",
+            left:"40", top:"360"
         },
         {
             name: "Garage", 
             left: "320", top: "300"   
         }
+    ]
+
+    const arrTurn = [
+        {
+            name: "Room 2", 
+            left: "-120", top: "100" 
+        },  
+        {
+            name: "Bath 2", 
+            left: "-20", top: "100" 
+        },   
+        {
+            name: "Laundry", 
+            left: "20", top: "100" 
+        },   
+        {
+            name: "Bath1", 
+            left: "-280", top: "190" 
+        },  
+        {
+            name: "Room 1", 
+            left: "-370", top: "290" 
+        }, 
+        {
+            name: "hall", 
+            left: "-190", top: "290" 
+        },
+        {
+            name: "Living Room", 
+            left: "-40", top: "290" 
+        },
+        {
+            name: "kitchen", 
+            left: "-70", top: "490" 
+        }, {
+            name: "Garage", 
+            left: "150", top: "490" 
+        },
+        
     ]
 
     // initial state
@@ -73,27 +116,32 @@ export default function Lighting(props) {
 
     const [state, dispatch] = useReducer(reducer, initState);
 
+    const [isOn,setIsOn] = useState([]);
 
     return(
         <React.Fragment>
         
         {/* button for modes */}
-            <div className="row p-0 justify-content-center"> 
-                {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
-            </div>
+        <div className="row p-0 justify-content-center mt-5"> 
+            {arrIcons.map((item, index) => <IconButton key={`${index}-lighting-button`} name={item.name} icon={item.icon}/>)}      
+        </div>
+
+        <div className="row d-flex justify-content-center mt-5">
         <div
-            className="bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
+            className="col-8 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
             style={{ 
-                backgroundImage: `url("https://i.ibb.co/Y3Q5xKY/plan.png")` ,
+                backgroundImage: `url("assets/plan-crock.png")` ,
                 backgroundRepeat: 'no-repeat',
-                height: 500
+                height: 700, 
+                /* backgroundAttachment: 'fixed',  */
+                backgroundSize: '93% 85%' ,
               }}
             >
             
             
             
             {/* switch for rooms */}
-            {arrSwitch.map((item, index) => {
+            {/*{arrSwitch.map((item, index) => {
                 return(
                     <SwitchInput 
                         key={`${index}-switch-inputs`}
@@ -104,15 +152,63 @@ export default function Lighting(props) {
                         onCheckHandler={(e) => {dispatch({ type: item.name, payload: e.target.checked });}}
                      />
                 );
+            })}*/}
+             {arrTurn.map((item, i) => {
+                return(
+                    
+                     <Bulb top={item.top} left={item.left} key={item.name} index={item.name} isOn={isOn} setIsOn={setIsOn}/>
+                );
             })}
+     
             
-            
+        </div>
         </div>
         </React.Fragment>
 
     );
 }
 
+const  TurnOn = (props)=>{
+    const left = props.left;
+    const top = props.top;
+    return(
+        <div class="btn-toolbar justify-content-between " role="toolbar" aria-label="Toolbar with button groups" 
+             style={{ position: "relative", top: `${top}px`, left: `${left}px` }}
+            >
+                <div class="btn-group-sm" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-outline-light">On</button>
+                    <button type="button" class="btn btn-outline-light">Off</button>
+                </div>
+        </div>
+
+    );
+}
+
+const Bulb =({index, isOn,setIsOn , top,left})=>{return (
+
+<span 
+
+style={{   position: "relative", top: `${top}px`, left: `${left}px` }}
+onClick={()=>{
+console.log(index)
+   if (isOn.includes(index))
+   {let new_ison = isOn.filter(e=>e!=index)
+    setIsOn(new_ison)}
+   
+   else{
+
+setIsOn([...isOn,index])
+   }
+    
+   }}>
+
+{isOn.includes(index)?<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" style={{fill: 'yellow'}} fill="currentColor" class="bi bi-lightbulb-fill " viewBox="0 0 16 16">
+  <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13h-5a.5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm3 8.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1-.5-.5z"/>
+</svg>: <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-lightbulb danger" viewBox="0 0 16 16">
+            <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a1.964 1.964 0 0 0-.453-.618A5.984 5.984 0 0 1 2 6zm6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1z"/>
+            </svg>}
+  </span>)}
+   
 
 function SwitchInput(props) {
     const name = props.name;
@@ -147,7 +243,7 @@ function IconButton(props) {
     const icon = props.icon;
 
     return (
-        <button type="button" class="btn btn-outline-light  m-4">
+        <button type="button" class="btn btn-outline-light m-2">
             {name}
             {icon}
         </button>

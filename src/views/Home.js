@@ -42,7 +42,7 @@ export default function Home(props) {
 
     return(
       <React.Fragment>
-        <div className="row p-5 m-5 justify-content-center">
+        <div className="row p-5 m-3 justify-content-center">
           {tabs.map((tabProps, index) => {
             return(
               <Tab 
@@ -56,6 +56,8 @@ export default function Home(props) {
         </div> 
 
         <WeatherComponent />
+        
+        <p class="text-light text-center font-italic p-4"> The house of tomorrow, Today...</p>
     
       </React.Fragment>
     ); 
