@@ -112,7 +112,7 @@ export function DateD(props) {
     })
 
     return(
-        <div className="row d-flex align-items-center">
+        <div className="row d-flex align-items-center justify-content-center">
             <div className="col-1 text-white mr-2">
                 <CalanderIcon />
             </div>
