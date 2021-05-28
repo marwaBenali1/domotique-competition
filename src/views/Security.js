@@ -3,9 +3,10 @@ import React from "react";
 
 export default function Security(props) {
     const arrDoors = [
-        { name: "Front door" },
-        { name: "Garage" },
-        { name: "Front door" },
+        { name: "Curtain 1" },
+        { name: "Curtain 2" },
+        { name: "Curtain 3" },
+        { name: "Roof" },
         { name: "Garage" },
     ];
 
@@ -39,17 +40,17 @@ export default function Security(props) {
         <div  class="row d-flex justify-content-center align-items-center">
             <div class=" col-6 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
                 style={{ 
-                backgroundImage: `url("assets/plan-crock.png")` ,
+                backgroundImage: `url("assets/planp.png")` ,
                 backgroundRepeat: 'no-repeat',
-                height:500, 
+                height:900, 
                 position :"relative",
-                top:"60px",
-                left:"80px", 
+                top:"130px",
+                left:"70px", 
               }}
             > </div>
         <div class="col-3">
 
-            <div class="card" style={{ opacity: 0.6}}>
+            <div class="card" style={{ opacity: 0.6, position :"relative",top:"-120px",left:"-10px", }}>
                 <h5 class="card-title mx-3 mt-3">
                     <DoorIcon width={30} height={30} /> <span className="ml-2">Manual control </span>
                 </h5>

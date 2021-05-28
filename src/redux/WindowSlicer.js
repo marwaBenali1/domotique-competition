@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    activeTab: "Security",
+    activeTab: "Lighting",
 }
 
 export const windowSlice = createSlice({
