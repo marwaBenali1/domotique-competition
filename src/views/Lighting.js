@@ -65,38 +65,38 @@ export default function Lighting(props) {
     const arrTurn = [
         {
             name: "Room 2", 
-            left: "-120", top: "100" 
+            left: "-110", top: "100" 
         },  
         {
             name: "Bath 2", 
-            left: "-20", top: "100" 
+            left: "-25", top: "100" 
         },   
         {
             name: "Laundry", 
-            left: "20", top: "100" 
+            left: "15", top: "100" 
         },   
         {
             name: "Bath1", 
-            left: "-280", top: "190" 
+            left: "-265", top: "190" 
         },  
         {
             name: "Room 1", 
-            left: "-370", top: "290" 
+            left: "-350", top: "290" 
         }, 
         {
             name: "hall", 
-            left: "-190", top: "290" 
+            left: "-200", top: "290" 
         },
         {
             name: "Living Room", 
-            left: "-40", top: "290" 
+            left: "-65", top: "290" 
         },
         {
             name: "kitchen", 
-            left: "-70", top: "490" 
+            left: "-110", top: "490" 
         }, {
             name: "Garage", 
-            left: "150", top: "490" 
+            left: "100", top: "460" 
         },
         
     ]
@@ -130,11 +130,11 @@ export default function Lighting(props) {
         <div
             className="col-8 bg-image flex justify-content-center p-0 h-full text-center shadow-1-strong rounded mb-5 text-white"
             style={{ 
-                backgroundImage: `url("assets/plan-crock.png")` ,
+                backgroundImage: `url("assets/planf.png")` ,
                 backgroundRepeat: 'no-repeat',
                 height: 700, 
                 /* backgroundAttachment: 'fixed',  */
-                backgroundSize: '93% 85%' ,
+                backgroundSize: '90% 85%' ,
               }}
             >
             
@@ -243,7 +243,7 @@ function IconButton(props) {
     const icon = props.icon;
 
     return (
-        <button type="button" class="btn btn-outline-light m-2">
+        <button type="button" class="btn btn-outline-light m-2" >
             {name}
             {icon}
         </button>
